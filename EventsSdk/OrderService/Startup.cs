@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ats.Core.Events;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,9 @@ namespace OrderService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddEvents(o => {
+                o.UseRabbitMq(Configuration);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
